@@ -5,3 +5,7 @@ export const theme = {
   extend: {},
 };
 export const plugins = [];
+
+export default {
+  // important: true,
+};
