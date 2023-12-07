@@ -1,12 +1,11 @@
-// import Home from "./pages/Home"
 import { StylesProvider } from '@material-ui/core/styles';
-import Product from "./pages/Product";
+import Register from './pages/Register';
 
 
 const App = () => {
   return (
     <StylesProvider injectFirst>
-    <Product/>
+        <Register/>
     </StylesProvider>
   )
 }
