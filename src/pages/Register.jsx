@@ -1,7 +1,7 @@
 
 const Register = () => {
   return (
-    <div className="flex justify-center items-center h-[100vh] bg-pink-300">
+    <div className="flex justify-center items-center h-[100vh] bg-pink-200">
         <div className="bg-white p-6 flex flex-col justify-center items-center gap-2 w-[45%]">
             <h2 className="text-2xl font-light mr-auto">CREATE AN ACCOUNT</h2>
             <div className="flex gap-2 justify-center w-full text-sm mt-4">

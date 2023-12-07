@@ -1,11 +1,11 @@
 import { StylesProvider } from '@material-ui/core/styles';
-import Register from './pages/Register';
+import Login from './pages/Login';
 
 
 const App = () => {
   return (
     <StylesProvider injectFirst>
-        <Register/>
+        <Login/>
     </StylesProvider>
   )
 }
