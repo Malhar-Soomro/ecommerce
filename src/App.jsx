@@ -1,11 +1,11 @@
 import { StylesProvider } from '@material-ui/core/styles';
-import ProductList from './pages/ProductList';
+import Cart from './pages/Cart';
 
 
 const App = () => {
   return (
     <StylesProvider injectFirst>
-        <ProductList/>
+        <Cart/>
     </StylesProvider>
   )
 }
