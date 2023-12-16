@@ -28,7 +28,7 @@ const Slider = () => {
       }
 
   return (
-    <div className="flex h-[100vh] w-[100%] overflow-hidden">
+    <div className="sm:flex h-[100vh] w-[100%] overflow-hidden hidden">
 
       <div className="z-10" onClick={(e)=> handleClick(e.target.id)}>
       <ArrowLeftOutlined id="prev" className="absolute left-10 top-[50%] cursor-pointer bg-amber-500 border-r-[50%] text-3xl"/>
