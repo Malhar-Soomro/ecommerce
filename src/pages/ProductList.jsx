@@ -13,9 +13,9 @@ const ProductList = () => {
     <div className="flex flex-col gap-8 p-4">
         <h1 className="text-3xl font-bold ">Dresses</h1>
         <div className="flex justify-between">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4 flex-col sm:flex-row">
                 <p className="text-xl font-semibold">Filter Products:</p>
-                <select className="text-black text-sm font-normal border border-black p-2 cursor-pointer" name="color" id="color" defaultValue="color">
+                <select className="text-black text-sm font-normal border border-black p-2 cursor-pointer w-full sm:w-auto" name="color" id="color" defaultValue="color">
                 <option value="color" disabled>Color</option>
                     <option value="white">White</option>
                     <option value="black">Black</option>
@@ -24,7 +24,7 @@ const ProductList = () => {
                     <option value="yellow">Yellow</option>
                     <option value="green">Green</option>
                 </select>
-                <select className='text-black text-sm font-normal border border-black p-2 cursor-pointer' name="color" id="size" defaultValue="size">
+                <select className='text-black text-sm font-normal border border-black p-2 cursor-pointer w-full sm:w-auto mt-3 sm:mt-0' name="color" id="size" defaultValue="size">
                 Color
                         <option value="size" disabled>Size</option>
                         <option value="1">XS</option>
@@ -34,7 +34,7 @@ const ProductList = () => {
                         <option value="5">XL</option>
                     </select>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 flex-col sm:flex-row">
                 <p className="text-xl font-semibold">Sort Products</p>
                 <select className="text-black text-sm font-normal border border-black p-[10px] cursor-pointer" name="color" id="color" defaultValue="newest">
                     <option value="newest">Newest</option>
