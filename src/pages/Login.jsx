@@ -2,7 +2,7 @@
 const Login = () => {
   return (
     <div className="flex justify-center items-center h-[100vh] bg-gray-200">
-      <div className="flex flex-col bg-white w-[28%] p-4 gap-2">
+      <div className="flex flex-col bg-white sm:w-[28%] md:w-[40%] lg:w-[28%] w-[90%] p-4 gap-2">
         <h2 className="text-2xl font-light mr-auto">SIGN IN</h2>
         <input className="border border-black p-2 w-full text-sm mt-2" type="text" placeholder="username" />
         <input className="border border-black p-2 w-full text-sm mt-2" type="text" placeholder="password" />
