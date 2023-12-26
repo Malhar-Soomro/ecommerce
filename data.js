@@ -29,18 +29,21 @@ export const categoryData = [
         id: 1,
         title: "SHIRT STYLE!",
         image: "/assets/category-image-1.jpg",
+        cat: "women"
     },
 
     {
         id: 2,
         title: "LOUNGEWEAR LOVE",
         image: "/assets/category-image-2.jpg",
+        cat: "coat"
     },
 
     {
         id: 3,
         title: "LIGHT JACKETS",
         image: "/assets/category-image-3.jpg",
+        cat: "jeans"
     }
 ]
 

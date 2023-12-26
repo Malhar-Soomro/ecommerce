@@ -4,18 +4,30 @@ import Announcement from "../components/Announcement"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import Newsletter from "../components/Newsletter"
+import { useLocation } from "react-router-dom"
+import { useState } from "react"
+import Products from "../components/Products"
 
 const ProductList = () => {
+  const location = useLocation();
+  const cat = location.pathname.split("/")[2];
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("newest");
+
+  const handleFilters = (e) => {
+    setFilters({...filters, [e.target.name]:e.target.value});
+  }
+
   return (
     <>
      <Navbar />
     <Announcement/>
     <div className="flex flex-col gap-8 p-4">
-        <h1 className="text-3xl font-bold ">Dresses</h1>
+        <h1 className="text-3xl font-bold ">{cat}</h1>
         <div className="flex justify-between">
             <div className="flex items-center gap-2 sm:gap-4 flex-col sm:flex-row">
                 <p className="text-xl font-semibold">Filter Products:</p>
-                <select className="text-black text-sm font-normal border border-black p-2 cursor-pointer w-full sm:w-auto" name="color" id="color" defaultValue="color">
+                <select className="text-black text-sm font-normal border border-black p-2 cursor-pointer w-full sm:w-auto" name="color" id="color" defaultValue="color" onChange={handleFilters}>
                 <option value="color" disabled>Color</option>
                     <option value="white">White</option>
                     <option value="black">Black</option>
@@ -24,54 +36,30 @@ const ProductList = () => {
                     <option value="yellow">Yellow</option>
                     <option value="green">Green</option>
                 </select>
-                <select className='text-black text-sm font-normal border border-black p-2 cursor-pointer w-full sm:w-auto mt-3 sm:mt-0' name="color" id="size" defaultValue="size">
+                <select className='text-black text-sm font-normal border border-black p-2 cursor-pointer w-full sm:w-auto mt-3 sm:mt-0' name="size" id="size" defaultValue="size" onChange={handleFilters}>
                 Color
                         <option value="size" disabled>Size</option>
-                        <option value="1">XS</option>
-                        <option value="2">S</option>
-                        <option value="3">M</option>
-                        <option value="4">L</option>
-                        <option value="5">XL</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
                     </select>
             </div>
             <div className="flex items-center gap-4 flex-col sm:flex-row">
                 <p className="text-xl font-semibold">Sort Products</p>
-                <select className="text-black text-sm font-normal border border-black p-[10px] cursor-pointer" name="color" id="color" defaultValue="newest">
+                <select className="text-black text-sm font-normal border border-black p-[10px] cursor-pointer" name="price" id="color" defaultValue="newest" onChange={(e)=>{setSort(e.target.value)}}>
                     <option value="newest">Newest</option>
-                    <option value="price_asc">Price(asc)</option>
-                    <option value="price_desc">Price(desc)</option>
+                    <option value="asc">Price(asc)</option>
+                    <option value="desc">Price(desc)</option>
                 </select>
             </div>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-2 p-5">
-    {productsData.map((item => (
-      <div key={item.id} className="bg-[#f5fbfd] min-w-[280px] h-[350px] flex flex-1 justify-center items-center relative">
-            <div className="w-[200px] h-[200px] bg-white rounded-[50%]">
-            </div>
-            <div className="h-[100%] w-[100%] absolute flex justify-center items-center">
-                <img className="h-[75%]"  src={item.img} alt="" />
-            </div>
-            <div className="absolute w-[100%] h-[100%] flex justify-center items-center gap-4 transition-all duration-500 opacity-0 hover:opacity-100 bg-[#0003]">
-                <div className="bg-white rounded-[50%] p-2 cursor-pointer hover:scale-110 transition-all duration-500 hover:bg-[#e9f5f5]">
-                  <ShoppingCartOutlined/>
-                </div>
-                <div className="bg-white rounded-[50%] p-2 cursor-pointer hover:scale-110 transition-all duration-500 hover:bg-[#e9f5f5]">
-                  <SearchOutlined/>
-                </div>
-                <div className="bg-white rounded-[50%] p-2 cursor-pointer hover:scale-110 transition-all duration-500 hover:bg-[#e9f5f5]">
-                  <FavoriteBorder/>
-                </div>
-            </div>
-        </div>
-    )))}
-
-     
-        
     </div>
-    </div>
+    <Products cat={cat} filters={filters} sort={sort}/>
     <Newsletter/>
     <Footer/>
-    </>
+  </>
   )
 }
 

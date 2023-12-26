@@ -25,7 +25,7 @@ const Navbar = () => {
                 <p className='md:text-sm text-xs'>REGISTER</p>
                 <p className='md:text-sm text-xs'>SIGN IN</p>
                 <IconButton className='relative' aria-label='cart'>
-                <Badge className='absolute top-3 right-3' badgeContent={4} color="primary"></Badge>
+                <Badge overlap='rectangular' className='absolute top-3 right-3' badgeContent={4} color="primary"></Badge>
                 <ShoppingCartOutlined className='text-black'/>
                 </IconButton>
             </div>

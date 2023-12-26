@@ -10,20 +10,22 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate
 } from "react-router-dom";
 
-
-
 const App = () => {
+
+  const user = true;
+
   return (
     <StylesProvider injectFirst>
     <Router>
         <Routes>
             <Route path="/" exact element={<Home/>}/>
-            <Route path="/product" exact element={<Product/>}/>
-            <Route path="/product-list" exact element={<ProductList/>}/>
-            <Route path="/register" exact element={<Register/>}/>
-            <Route path="/login" exact element={<Login/>}/>
+            <Route path="/product/:id" exact element={<Product/>}/>
+            <Route path="/products/:category" exact element={<ProductList/>}/>
+            <Route path="/register" exact element={ user ? <Navigate to="/"/> : <Register/>}/>
+            <Route path="/login" exact element={ user ? <Navigate to="/" /> : <Login/>}/>
             <Route path="/cart" exact element={<Cart/>}/>
         </Routes>
     </Router>
