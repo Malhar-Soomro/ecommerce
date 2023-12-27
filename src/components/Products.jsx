@@ -1,8 +1,6 @@
 import {  FavoriteBorder, SearchOutlined, ShoppingCartOutlined } from "@material-ui/icons"
-import { productsData } from "../../data"
 import axios from "axios"
 import { useEffect, useState } from "react"
-
 
 const Product = ({item}) => {
   return (
@@ -40,9 +38,8 @@ const Products = ({cat, filters, sort}) => {
           `http://localhost:5000/api/products?category=${cat}` 
           : "http://localhost:5000/api/products");
         setProducts(res.data);
-        // console.log(res.data)
       } catch (error) {
-        console.log(error);;
+        console.log(error);
       }
     } 
     getProducts();
@@ -53,14 +50,9 @@ const Products = ({cat, filters, sort}) => {
     setFilteredProducts(
       products.filter((item) => 
       Object.entries(filters)?.every(([key, value]) => {
-        console.log(key, value)
-
         return item[key]?.includes(value)  
-      }
-       )
-      )
-    );
-  },[filters, cat, products]);
+      })));
+      },[filters, cat, products]);
 
   useEffect(() => {
     if(sort === "newest"){
