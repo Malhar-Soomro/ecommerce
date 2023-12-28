@@ -43,7 +43,7 @@ export const categoryData = [
         id: 3,
         title: "LIGHT JACKETS",
         image: "/assets/category-image-3.jpg",
-        cat: "jeans"
+        cat: "men"
     }
 ]
 

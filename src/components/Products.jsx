@@ -1,4 +1,4 @@
-import {  FavoriteBorder, SearchOutlined, ShoppingCartOutlined } from "@material-ui/icons"
+import {  FavoriteBorder, PrintDisabled, SearchOutlined, ShoppingCartOutlined } from "@material-ui/icons"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
@@ -27,56 +27,58 @@ const Product = ({item}) => {
 
 const Products = ({cat, filters, sort}) => {
 
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [products , setProducts] = useState([]);
+  const [filteredProducts , setFilteredProducts] = useState([]);
 
   useEffect(() => {
+
     const getProducts = async() => {
       try {
-        const res = await axios.get(
-          cat?
-          `http://localhost:5000/api/products?category=${cat}` 
-          : "http://localhost:5000/api/products");
-        setProducts(res.data);
+        const response = await axios.get( cat ? `http://localhost:5000/api/products?category=${cat}` : "http://localhost:5000/api/products" );
+        setProducts(response.data);
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    } 
+    }
     getProducts();
+
   },[cat]);
 
   useEffect(() => {
-    cat && 
-    setFilteredProducts(
-      products.filter((item) => 
-      Object.entries(filters)?.every(([key, value]) => {
-        return item[key]?.includes(value)  
-      })));
-      },[filters, cat, products]);
+    cat &&
+   setFilteredProducts(products.filter((product) => {
+    if(Object.keys(filters).length === 0) return products;
+    else if(filters.color === undefined){
+      return product.size.includes(filters.size);
+    }
+    else if(filters.size === undefined){
+      return product.color.includes(filters.color);
+    }
+    else return product.color.includes(filters.color) && product.size.includes((filters.size));
+    }));
+  },[filters, cat, products]);
 
   useEffect(() => {
-    if(sort === "newest"){
-      setFilteredProducts((prev) => 
-        [...prev].sort((a, b) => a.createdAt - b.createdAt)
-      );
-    } else if(sort === "asc"){
-      setFilteredProducts((prev) => 
-        [...prev].sort((a, b) => a.price - b.price)
-      );
-    } else {
-      setFilteredProducts((prev) => 
-        [...prev].sort((a, b) => b.price - a.price)
-      );
-    }
-  },[sort]);
+    if(sort === "newest")
+    setFilteredProducts((prev) => 
+    [...prev].sort((a,b) =>  a.createdAt - b.createdAt));
+    else if(sort === "asc")
+    setFilteredProducts((prev) => 
+    [...prev].sort((a,b) =>  a.price - b.price));
+    else 
+    setFilteredProducts((prev) => 
+    [...prev].sort((a,b) =>  b.price - a.price));
+  },[sort])
 
+  
+  console.log(filteredProducts)
   return (
     <div className="flex flex-wrap items-center justify-between gap-2 p-5">
     {cat ? filteredProducts.map((item => (
       <Product key={item._id} item={item}/>
     ))) : products.map((item => (
-      <Product key={item._id} item={item}/>
-    )))
+      <Product key={item.id} item={item}/>
+    ))) 
     }        
     </div>
   )

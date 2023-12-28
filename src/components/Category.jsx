@@ -8,7 +8,7 @@ const Category = () => {
 
       {categoryData.map((item) => {
         return(
-          <Link key={item.id} className="card h-[70vh] relative flex-1" to={`/products/${item.cat}`}>
+          <Link key={item.id} className="card h-[70vh] relative flex-1" to={`products/${item.cat}`}>
             <div className="h-[150px] md:h-[100%] w-[100%]">
               <img className="w-[100%] h-[100%] object-cover" src={item.image} alt="" />
             </div>

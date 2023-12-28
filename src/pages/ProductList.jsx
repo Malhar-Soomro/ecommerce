@@ -1,22 +1,25 @@
-import { FavoriteBorder, SearchOutlined, ShoppingCartOutlined } from "@material-ui/icons"
-import { productsData } from "../../data"
+import { useState } from "react"
 import Announcement from "../components/Announcement"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import Newsletter from "../components/Newsletter"
-import { useLocation } from "react-router-dom"
-import { useState } from "react"
 import Products from "../components/Products"
+import { useLocation } from "react-router-dom"
 
 const ProductList = () => {
-  const location = useLocation();
-  const cat = location.pathname.split("/")[2];
-  const [filters, setFilters] = useState({});
-  const [sort, setSort] = useState("newest");
 
-  const handleFilters = (e) => {
-    setFilters({...filters, [e.target.name]:e.target.value});
-  }
+    const location = useLocation();
+    const cat = location.pathname.split("/")[2];
+
+    const [filters, setFilters] = useState({});
+    const [sort, setSort] = useState("newest");
+
+    const handleFilters = (e) => {
+        setFilters({
+            ...filters,
+            [e.target.name]:e.target.value
+        });
+    }
 
   return (
     <>
@@ -28,9 +31,9 @@ const ProductList = () => {
             <div className="flex items-center gap-2 sm:gap-4 flex-col sm:flex-row">
                 <p className="text-xl font-semibold">Filter Products:</p>
                 <select className="text-black text-sm font-normal border border-black p-2 cursor-pointer w-full sm:w-auto" name="color" id="color" defaultValue="color" onChange={handleFilters}>
-                <option value="color" disabled>Color</option>
-                    <option value="white">White</option>
-                    <option value="black">Black</option>
+                    <option value="color" disabled>Color</option>
+                    <option value="gray">Gray</option>
+                    <option value="pink">Pink</option>
                     <option value="red">Red</option>
                     <option value="blue">Blue</option>
                     <option value="yellow">Yellow</option>
@@ -48,7 +51,7 @@ const ProductList = () => {
             </div>
             <div className="flex items-center gap-4 flex-col sm:flex-row">
                 <p className="text-xl font-semibold">Sort Products</p>
-                <select className="text-black text-sm font-normal border border-black p-[10px] cursor-pointer" name="price" id="color" defaultValue="newest" onChange={(e)=>{setSort(e.target.value)}}>
+                <select className="text-black text-sm font-normal border border-black p-[10px] cursor-pointer" name="price" id="color" defaultValue="newest" onChange={(e) => setSort(e.target.value)}>
                     <option value="newest">Newest</option>
                     <option value="asc">Price(asc)</option>
                     <option value="desc">Price(desc)</option>
