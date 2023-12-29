@@ -3,8 +3,44 @@ import Newsletter from '../components/Newsletter'
 import Footer from '../components/Footer'
 import Announcement from '../components/Announcement'
 import { Add, Remove } from '@material-ui/icons'
+import { useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { publicRequest } from '../requestMethod'
+
 
 const Product = () => {
+
+     const location = useLocation();
+     const productId = location.pathname.split("/")[2];
+
+     const [product, setProduct] = useState({});
+     const [quantity, setQuantity] = useState(1);
+     const [color, setColor] = useState();
+     const [size, setSize] = useState();
+
+     console.log(color, size)
+
+     useEffect(() => {
+
+        const getProduct = async () => {
+            try {
+                const response = await publicRequest.get("/products/find/"+productId)
+                setProduct(response.data);
+                console.log(response.data)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getProduct();
+
+     },[productId]);
+
+     const handleOnClick = (type) => {
+        if(type === "add"){
+            setQuantity(quantity + 1);
+        } else quantity > 1 && setQuantity(quantity - 1);
+     }
+
   return (
     <>
     <Navbar />
@@ -14,37 +50,39 @@ const Product = () => {
             <img className='w-[100%] h-[40vh] sm:h-[90vh] object-cover' src="/assets/jean.jpg" alt="jeans pic" />
         </div>
         <div className='flex-1 flex flex-col gap-4 p-2'>
-            <h2 className='text-3xl font-extralight '>Denim Jumpsuit</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget tristique tortor pretium ut. Curabitur elit justo, consequat id condimentum ac, volutpat ornare.</p>
+            <h2 className='text-3xl font-extralight '>{product.title}</h2>
+            <p>{product.desc}</p>
             <p className="text-[40px] font-thin flex gap-2">
                 <span>$</span>
-                20
+                {product.price}
             </p>
             <div className='flex sm:gap-20 justify-between sm:justify-start mt-4'>
                 <div className="flex gap-1 items-center">
                     <p className='text-xl font-extralight'>Color</p>
-                    <span className='bg-black rounded-full w-5 h-5 cursor-pointer'></span>
-                    <span className='bg-[#00008b] rounded-full w-5 h-5 cursor-pointer ml-1'></span>
-                    <span className='bg-[#808080] rounded-full w-5 h-5 cursor-pointer ml-1'></span>
+                    {product.color?.map((c) => 
+                        <span 
+                        key={c}
+                        style={{'--color':c}} 
+                        className={`bg-[--color] rounded-full w-5 h-5 cursor-pointer`}
+                        onClick={() => setColor(c)}
+                        >
+                        </span>
+                    )}
                 </div>
                 <div className='text-xl font-extralight flex gap-2 items-center'>
                     Size 
-                    <select className='text-black text-sm font-normal border border-black p-1 cursor-pointer' name="" id="">
-                        <option value="1">XS</option>
-                        <option value="2">S</option>
-                        <option value="3">M</option>
-                        <option value="4">L</option>
-                        <option value="5">XL</option>
+                    <select className='text-black text-sm font-normal border border-black p-1 cursor-pointer' name="size" onChange={(e) => setSize(e.target.value)} id="size">
+                    {product.size?.map((s) => 
+                        <option key={s} value={s}>{s}</option>
+                        )}
                     </select>
                 </div>
             </div>
             <div className='flex sm:gap-20 justify-between sm:justify-start items-center mt-4'>
                 <div className="flex items-center gap-2">
-                    {/* <p className='text-2xl font-extralight'> - </p> */}
-                    <Remove/>
-                    <p className='text-xl font-semibold border border-[#008080] px-3 rounded-lg'>1</p>
-                    <Add/>
-                    {/* <p className='text-3xl font-medium'>+</p> */}
+                    <Remove onClick={()=>handleOnClick("remove")}/>
+                    <p className='text-xl font-semibold border border-[#008080] px-3 rounded-lg'>{quantity}</p>
+                    <Add onClick={()=>handleOnClick("add")}/>
 
                 </div>
                 <button className='transition-all border-2 border-[#008080] p-3 text-sm font-medium hover:bg-gray-100'>ADD TO CART</button>
