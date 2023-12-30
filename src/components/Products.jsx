@@ -1,6 +1,7 @@
 import {  FavoriteBorder, PrintDisabled, SearchOutlined, ShoppingCartOutlined } from "@material-ui/icons"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 const Product = ({item}) => {
   return (
@@ -15,7 +16,9 @@ const Product = ({item}) => {
                   <ShoppingCartOutlined/>
                 </div>
                 <div className="bg-white rounded-[50%] p-2 cursor-pointer hover:scale-110 transition-all duration-500 hover:bg-[#e9f5f5]">
-                  <SearchOutlined/>
+                  <Link to={`/product/${item._id}`}>
+                    <SearchOutlined/>
+                  </Link>
                 </div>
                 <div className="bg-white rounded-[50%] p-2 cursor-pointer hover:scale-110 transition-all duration-500 hover:bg-[#e9f5f5]">
                   <FavoriteBorder/>
