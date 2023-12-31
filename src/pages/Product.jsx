@@ -6,6 +6,8 @@ import { Add, Remove } from '@material-ui/icons'
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { publicRequest } from '../requestMethod'
+import { addProduct } from '../redux/cartRedux'
+import { useDispatch } from 'react-redux'
 
 
 const Product = () => {
@@ -17,6 +19,8 @@ const Product = () => {
      const [quantity, setQuantity] = useState(1);
      const [color, setColor] = useState();
      const [size, setSize] = useState();
+
+     const dispatch = useDispatch();
 
      console.log(color, size)
 
@@ -39,6 +43,10 @@ const Product = () => {
         if(type === "add"){
             setQuantity(quantity + 1);
         } else quantity > 1 && setQuantity(quantity - 1);
+     }
+
+     const addToCart = () => {
+       dispatch(addProduct({...product, quantity, size, color}));
      }
 
   return (
@@ -85,7 +93,7 @@ const Product = () => {
                     <Add onClick={()=>handleOnClick("add")}/>
 
                 </div>
-                <button className='transition-all border-2 border-[#008080] p-3 text-sm font-medium hover:bg-gray-100'>ADD TO CART</button>
+                <button onClick={addToCart} className='transition-all border-2 border-[#008080] p-3 text-sm font-medium hover:bg-gray-100'>ADD TO CART</button>
             </div>
         </div>
 

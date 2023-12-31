@@ -2,8 +2,11 @@ import { ShoppingCartOutlined, SearchOutlined } from '@material-ui/icons';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+
+    const quantity = useSelector(state => state.cart.quantity);
     return (
         <div className="flex justify-between items-center sm:p-2 sm:mx-2 p-1 px-4">
 
@@ -25,7 +28,7 @@ const Navbar = () => {
                 <p className='md:text-sm text-xs'>REGISTER</p>
                 <p className='md:text-sm text-xs'>SIGN IN</p>
                 <IconButton className='relative' aria-label='cart'>
-                <Badge overlap='rectangular' className='absolute top-3 right-3' badgeContent={4} color="primary"></Badge>
+                <Badge overlap='rectangular' className='absolute top-3 right-3' badgeContent={quantity} color="primary"></Badge>
                 <ShoppingCartOutlined className='text-black'/>
                 </IconButton>
             </div>
