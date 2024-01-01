@@ -6,11 +6,14 @@ import { Add, Remove } from '@material-ui/icons'
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { publicRequest } from '../requestMethod'
+import { useDispatch } from 'react-redux'
+import { addProduct } from '../redux/cartRedux'
 
 const Product = () => {
 
     const location = useLocation();
     const id = location.pathname.split("/")[2];
+    const dispatch = useDispatch();
 
     const [product, setProduct] = useState();
     const [quantity, setQuantity] = useState(1);
@@ -35,8 +38,10 @@ const Product = () => {
 
     },[id]);
 
-    console.log(product)
-    console.log({color, size})
+    const addToCart = () => {
+        console.log()
+        dispatch(addProduct({...product, size, color, quantity}));
+    }
 
   return (
     <>
@@ -80,7 +85,7 @@ const Product = () => {
                     <Add onClick={()=> handleOnClick("add")}/>
 
                 </div>
-                <button className='transition-all border-2 border-[#008080] p-3 text-sm font-medium hover:bg-gray-100'>ADD TO CART</button>
+                <button onClick={addToCart} className='transition-all border-2 border-[#008080] p-3 text-sm font-medium hover:bg-gray-100'>ADD TO CART</button>
             </div>
         </div>
 
