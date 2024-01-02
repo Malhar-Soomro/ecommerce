@@ -27,10 +27,15 @@ const Navbar = () => {
             <div className="flex items-center gap-1 md:gap-6 ">
                 <p className='md:text-sm text-xs'>REGISTER</p>
                 <p className='md:text-sm text-xs'>SIGN IN</p>
-                <IconButton className='relative' aria-label='cart'>
-                <Badge overlap='rectangular' className='absolute top-3 right-3' badgeContent={quantity} color="primary"></Badge>
-                <ShoppingCartOutlined className='text-black'/>
-                </IconButton>
+                <Link to="/cart">
+                    <IconButton className='relative' aria-label='cart'>
+                    <Badge overlap='rectangular' 
+                    className='absolute top-3 right-3' 
+                    badgeContent={quantity} 
+                    color="primary"></Badge>
+                    <ShoppingCartOutlined className='text-black'/>
+                    </IconButton>
+                </Link>
             </div>
         </div>
     );

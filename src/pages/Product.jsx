@@ -22,8 +22,6 @@ const Product = () => {
 
      const dispatch = useDispatch();
 
-     console.log(color, size)
-
      useEffect(() => {
 
         const getProduct = async () => {
@@ -55,7 +53,7 @@ const Product = () => {
     <Announcement/>
     <div className='flex sm:p-12 p-3 sm:gap-12 gap-3 flex-col sm:flex-row'>
         <div className='flex-1'>
-            <img className='w-[100%] h-[40vh] sm:h-[90vh] object-cover' src="/assets/jean.jpg" alt="jeans pic" />
+            <img className='w-[100%] h-[40vh] sm:h-[90vh] object-cover' src={product.img} alt="jeans pic" />
         </div>
         <div className='flex-1 flex flex-col gap-4 p-2'>
             <h2 className='text-3xl font-extralight '>{product.title}</h2>
