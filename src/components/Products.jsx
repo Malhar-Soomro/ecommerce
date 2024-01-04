@@ -74,13 +74,12 @@ const Products = ({cat, filters, sort}) => {
   },[sort])
 
   
-  console.log(filteredProducts)
   return (
     <div className="flex flex-wrap items-center justify-between gap-2 p-5">
     {cat ? filteredProducts.map((item => (
       <Product key={item._id} item={item}/>
     ))) : products.map((item => (
-      <Product key={item.id} item={item}/>
+      <Product key={item._id} item={item}/>
     ))) 
     }        
     </div>

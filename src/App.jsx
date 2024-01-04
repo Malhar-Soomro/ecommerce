@@ -5,6 +5,7 @@ import Product from './pages/Product';
 import ProductList from './pages/ProductList';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Success from './pages/Success';
 
 import {
   BrowserRouter as Router,
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/register" exact element={ user ? <Navigate to="/"/> : <Register/>}/>
             <Route path="/login" exact element={ user ? <Navigate to="/" /> : <Login/>}/>
             <Route path="/cart" exact element={<Cart/>}/>
+            <Route path="/success" exact element={<Success/>}/>
         </Routes>
     </Router>
     </StylesProvider>
