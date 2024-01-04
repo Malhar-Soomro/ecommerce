@@ -4,12 +4,43 @@ import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import Announcement from "../components/Announcement"
 import { useSelector } from "react-redux"
+import StripeCheckout from "react-stripe-checkout"
+import { useEffect, useState } from "react"
+import {userRequest} from "../requestMethod";
+import { useNavigate } from "react-router-dom"
+
+// const KEY = process.env.REACT;
 
 const Cart = () => {
 
     const cart = useSelector(state => state.cart);
-    console.log(cart)
-    console.log()
+    const [stripeToken, setStripeToken] = useState(null);
+
+    const navigate = useNavigate();
+
+
+    const onToken = (token) => {
+        setStripeToken(token);
+    }
+
+    console.log(stripeToken)
+
+    useEffect(() => {
+        const makeRequest = async () => {
+            try {
+                const res = await userRequest.post("/checkout/payment", {
+                    tokenId: stripeToken.id,
+                    amount: cart.total * 100,
+                });
+                console.log(res.data)
+                navigate("/success", {state: res.data});
+                
+            } catch (error) {
+                console.log(error);   
+            }
+        };
+        (stripeToken && cart.total > 1) && makeRequest();
+    },[stripeToken, cart.total, navigate]);
 
   return (
     <>
@@ -29,7 +60,7 @@ const Cart = () => {
                 <div className="flex-1">
                     {/* {cart && <div className="text-center"> No product </div>} */}
                     {cart.products.length === 0 ? <div className="text-center"> No any product in the cart </div> : cart?.products?.map((product) => 
-                    <div className="flex justify-between w-full items-center flex-col sm:flex-row"> 
+                    <div key={product._id} className="flex justify-between w-full items-center flex-col sm:flex-row"> 
                         <div className="flex items-center gap-4">
                             <img className="w-[200px]" src={product.img} alt="" />
                             <div className="content flex flex-col gap-4">
@@ -69,7 +100,22 @@ const Cart = () => {
                         <p>Total</p>
                         <p>$ {cart.total}</p>
                     </div>
-                    <button className="bg-black p-2 text-white text-sm font-semibold outline-none">CHECKOUT NOW</button>
+
+                    <StripeCheckout
+                        className="w-[100%]"
+                        name="malhar"
+                        image='https://avatars.githubusercontent.com/u/1486366?v=4'
+                        description={`your total amount is $${cart.total}`}
+                        amount={cart.total * 100}
+                        // currency='usd'
+                        billingAddress
+                        shippingAddress
+                        token={onToken}
+                        stripeKey='pk_test_51JwNASSINQOE8taN0zPvLTfpWy8N5aT3ltdAcDqi9p1IGlIE6BMCXmRYYrtv4mlhwj8VeWcY3P4EZVyrnnSKgcDc009FPfSXZx'
+                    >
+                        <button className="bg-black p-2 text-white text-sm font-semibold outline-none w-[100%]">CHECKOUT NOW</button>
+                </StripeCheckout>
+                    
                 </div>
             </div>
         </div>
