@@ -17,7 +17,7 @@ const Login = () => {
       <div className="flex flex-col bg-white sm:w-[28%] md:w-[40%] lg:w-[28%] w-[90%] p-4 gap-2">
         <h2 className="text-2xl font-light mr-auto">SIGN IN</h2>
         <input className="border border-black p-2 w-full text-sm mt-2" type="text" placeholder="username" name="username" onChange={handleOnChange} />
-        <input className="border border-black p-2 w-full text-sm mt-2" type="text" placeholder="password" name="password" onChange={handleOnChange}/>
+        <input className="border border-black p-2 w-full text-sm mt-2" type="password" placeholder="password" name="password" onChange={handleOnChange}/>
         <button onClick={() => login(dispatch, authData)} className="bg-[#008080] mr-auto w-[40%] py-3 text-white text-sm disabled:cursor-not-allowed disabled:text-[#008080]" disabled={isFetching}>LOGIN</button>
         {error && <p className="text-red-500">Something Went Wrong</p>}
         <a className="underline text-xs mt-2" href="#">DO NOT REMEMBER THE PASSWORD?</a>

@@ -37,6 +37,7 @@ const Cart = () => {
       },[stripeToken, cart.total]);
 
 
+
   return (
     <>
         <Navbar />
@@ -54,7 +55,7 @@ const Cart = () => {
             <div className="flex mt-5 gap-5 md:gap-10 lg:gap-36  items-center flex-col sm:flex-row">
                 <div className="flex-1">
                     {cart.products.map((product) => 
-                    <div key={product._id} className="flex justify-between w-full items-center border-b-[1px] border-[#eeeeee] flex-col sm:flex-row pb-5"> 
+                    <div key={product._img} className="flex justify-between w-full items-center border-b-[1px] border-[#eeeeee] flex-col sm:flex-row pb-5"> 
                         <div key={product._id} className="flex items-center gap-4">
                             <img className="w-[200px]" src={product.img} alt="product image" />
                             <div className="content flex flex-col gap-4">
