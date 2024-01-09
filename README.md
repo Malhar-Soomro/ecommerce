@@ -1,7 +1,6 @@
 # MERN Ecommerce Web Application
 
-### _
-Welcome to our cutting-edge MERN (MongoDB, Express.js, React.js, Node.js) Stack E-Commerce platform – where seamless functionality meets great user experience!_
+### _Welcome to our cutting-edge MERN (MongoDB, Express.js, React.js, Node.js) Stack E-Commerce platform – where seamless functionality meets great user experience!_
 
 ### Link : https://full-stack-ecommerce-web.netlify.app/
 
