@@ -13,7 +13,7 @@ const Footer = () => {
     <div className="flex justify-start gap-10 sm:p-4 flex-col md:flex-row">
 
         <div className="flex flex-col flex-1 gap-4 sm:p-0 p-4">
-            <h1 className="text-3xl font-bold">LAMA.</h1>
+            <h1 className="text-3xl font-bold">E-Store</h1>
             <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable.</p>
             <div className="icons flex gap-4">
                 <div className="bg-[#3b5999] rounded-[50%] p-2">
@@ -56,15 +56,15 @@ const Footer = () => {
             <h2 className="text-xl font-bold mb-2">Contact</h2>
             <div className="flex gap-2">
                 <Room/>
-                <p>622 Dixie Path , South Tobinchester 98336</p>
+                <p>Sadar Karachi</p>
             </div>
             <div className="flex gap-2">
                 <Phone/>
-                <p>+1 234 56 78</p>
+                <p>+92 349 5781542</p>
             </div>
             <div className="flex gap-2">
                 <MailOutline/>  
-                <p>contact@lama.dev</p>             
+                <p>malharsoomro2@gmail.com</p>             
             </div>
             <div className="">
                 <img className=" w-40 sm:w-max" src="/src/assets/payment.png" alt="" />
