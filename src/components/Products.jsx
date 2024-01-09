@@ -2,6 +2,7 @@ import {  FavoriteBorder, SearchOutlined, ShoppingCartOutlined } from "@material
 import axios from "axios"
 import { useEffect, useState } from "react"
 import {Link} from "react-router-dom";
+import { publicRequest } from "../requestMethod";
 
 const Product = ({item}) => {
   return (
@@ -36,10 +37,11 @@ const Products = ({cat, filters, sort}) => {
   useEffect(() => {
     const getProducts = async() => {
       try {
-        const res = await axios.get(
-          cat?
-          `http://localhost:5000/api/products?category=${cat}` 
-          : "http://localhost:5000/api/products");
+        // const res = await axios.get(
+        //   cat?
+        //   `http://localhost:5000/api/products?category=${cat}` 
+        //   : "http://localhost:5000/api/products");
+          const res = await publicRequest.get( cat? `/products?category${cat}` : "/products");
         setProducts(res.data);
       } catch (error) {
         console.log(error);
