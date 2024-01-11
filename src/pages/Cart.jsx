@@ -33,7 +33,7 @@ const Cart = () => {
                     amount: cart.total * 100,
                 });
                 console.log(res.data)
-                navigate("/success", {state: res.data});
+                navigate("/success", {state: {stripeData:res.data, cart}});
                 
             } catch (error) {
                 console.log(error);   
@@ -41,6 +41,7 @@ const Cart = () => {
         };
         (stripeToken && cart.total > 1) && makeRequest();
     },[stripeToken, cart.total, navigate]);
+
 
   return (
     <>
